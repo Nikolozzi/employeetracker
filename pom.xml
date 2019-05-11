@@ -43,7 +43,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- spring & mongodb -->
+        <!-- spring & repository -->
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-mongodb</artifactId>

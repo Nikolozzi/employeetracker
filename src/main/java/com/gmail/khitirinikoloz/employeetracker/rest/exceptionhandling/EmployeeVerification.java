@@ -1,15 +1,15 @@
-package com.gmail.khitirinikoloz.employeetracker.rest;
+package com.gmail.khitirinikoloz.employeetracker.rest.exceptionhandling;
 
 import com.gmail.khitirinikoloz.employeetracker.entity.Employee;
-import com.gmail.khitirinikoloz.employeetracker.entity.LocationEntry;
-import com.gmail.khitirinikoloz.employeetracker.mongodb.EmployeeRepository;
+import com.gmail.khitirinikoloz.employeetracker.entity.dto.LocationDto;
+import com.gmail.khitirinikoloz.employeetracker.repository.EmployeeRepository;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class EmployeeVerification {
 
-    public static void verifyLocation(LocationEntry location, EmployeeRepository repository){
+    public static void verifyLocation(LocationDto location, EmployeeRepository repository){
 
         if(location.getEmployee() == null || location.getEmployee().isEmpty() ||
                 location.getLongitude() == null || location.getLongitude().isEmpty() ||

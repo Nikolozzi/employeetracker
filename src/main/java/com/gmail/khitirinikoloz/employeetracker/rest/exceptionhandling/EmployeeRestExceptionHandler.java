@@ -1,4 +1,4 @@
-package com.gmail.khitirinikoloz.employeetracker.rest;
+package com.gmail.khitirinikoloz.employeetracker.rest.exceptionhandling;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

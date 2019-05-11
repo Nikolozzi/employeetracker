@@ -1,4 +1,4 @@
-package com.gmail.khitirinikoloz.employeetracker.mongodb;
+package com.gmail.khitirinikoloz.employeetracker.repository;
 
 import com.gmail.khitirinikoloz.employeetracker.entity.Employee;
 import org.springframework.data.mongodb.repository.MongoRepository;

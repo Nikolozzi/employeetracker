@@ -2,9 +2,12 @@ package com.gmail.khitirinikoloz.employeetracker.rest;
 
 import com.gmail.khitirinikoloz.employeetracker.entity.Employee;
 import com.gmail.khitirinikoloz.employeetracker.entity.EmployeeLocation;
-import com.gmail.khitirinikoloz.employeetracker.entity.LocationEntry;
-import com.gmail.khitirinikoloz.employeetracker.mongodb.EmployeeLocationRepository;
-import com.gmail.khitirinikoloz.employeetracker.mongodb.EmployeeRepository;
+import com.gmail.khitirinikoloz.employeetracker.entity.dto.EmployeeCount;
+import com.gmail.khitirinikoloz.employeetracker.entity.dto.LocationDto;
+import com.gmail.khitirinikoloz.employeetracker.repository.EmployeeLocationRepository;
+import com.gmail.khitirinikoloz.employeetracker.repository.EmployeeRepository;
+import com.gmail.khitirinikoloz.employeetracker.rest.exceptionhandling.EmployeeVerification;
+import com.gmail.khitirinikoloz.employeetracker.rest.exceptionhandling.InvalidEmployeeException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.geo.Distance;
 import org.springframework.data.geo.Metrics;
@@ -12,7 +15,6 @@ import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -59,7 +61,7 @@ public class EmployeeRestController {
 
     @PostMapping("/employees/location")
     public EmployeeLocation addEmployeeLocation(
-            @RequestBody LocationEntry location)
+            @RequestBody LocationDto location)
     {
         EmployeeVerification.verifyLocation(location, employeeRepo);
 
@@ -103,4 +105,17 @@ public class EmployeeRestController {
 
         return "Deleted user: " + email;
     }
+
+    @PostMapping("/employees/location/date")
+    public List<EmployeeCount> getEmployeesByDate(@RequestParam("startDate") String startDate,
+                                                  @RequestParam("endDate") String endDate, @RequestParam("limit") int limit)
+    {
+
+        List<EmployeeCount> employees = locationRepo.findEmployeeLocationByDateInRange(startDate,endDate,limit);
+
+        return employees;
+    }
+
+
+
 }

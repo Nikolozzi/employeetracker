@@ -1,6 +1,6 @@
-package com.gmail.khitirinikoloz.employeetracker.entity;
+package com.gmail.khitirinikoloz.employeetracker.entity.dto;
 
-public class LocationEntry {
+public class LocationDto {
 
     private String employee;
     private String longitude;
