@@ -8,7 +8,6 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -24,10 +23,10 @@ public class EmployeeLocationRepositoryCustomImpl implements EmployeeLocationRep
     @Override
     public List<EmployeeCount> findEmployeeLocationByDateInRange(String startDate, String endDate, int limit) {
 
-
         Aggregation agg = newAggregation(
             match(Criteria.where("date").gte(startDate).lte(endDate)),
-            group("email").count().as("total"),
+            group("employee").count().as("total"),
+            project("total").and("employee").previousOperation(),
             sort(Sort.Direction.DESC,"total"),
             limit(limit)
         );
@@ -37,6 +36,7 @@ public class EmployeeLocationRepositoryCustomImpl implements EmployeeLocationRep
 
 
         List<EmployeeCount> result = groupResults.getMappedResults();
+
 
         return result;
     }
